@@ -1,0 +1,10 @@
+services:
+  insurance-api:
+    image: insurance:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: insurance-api
+    restart: always
+    ports:
+      - '8080:8080'

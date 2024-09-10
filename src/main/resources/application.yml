@@ -1,0 +1,31 @@
+server:
+    servlet:
+        context-path: /insurance/api
+
+springdoc:
+    swagger-ui:
+        path: /swagger.html
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+
+spring:
+    datasource:
+        url: jdbc:h2:mem:insurance_db
+        driverClassName: org.h2.Driver
+        username: sa
+        password:
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: update
+    h2:
+        console:
+            enabled: true
+
+gateway:
+    catalog-service:
+        url: https://e13286f8-d609-4189-ab16-c70bde15bf9d.mock.pstmn.io

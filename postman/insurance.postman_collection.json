@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "34f3c3c6-fb2b-4e02-8b16-89c28f9b8f3a",
+		"name": "[ITAU] insurance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2699682",
+		"_collection_link": "https://winter-spaceship-895519.postman.co/workspace/cashin~aaac5f4b-abe1-4f1b-ad90-935aa224641b/collection/2699682-34f3c3c6-fb2b-4e02-8b16-89c28f9b8f3a?action=share&source=collection_link&creator=2699682"
+	},
+	"item": [
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/insurance/api/actuator/health",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"insurance",
+						"api",
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"teste\",\n  \"categoria\": \"VIDA\",\n  \"preco_base\": 50.20\n//   \"preco_tarifado\": 12.900312\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/insurance/api/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"insurance",
+						"api",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"teste2\",\n  \"categoria\": \"VIDA\",\n  \"preco_base\": 60.20\n//  \"preco_tarifado\": 12.900312\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/insurance/api/product/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"insurance",
+						"api",
+						"product",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

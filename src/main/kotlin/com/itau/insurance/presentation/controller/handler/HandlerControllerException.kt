@@ -1,8 +1,8 @@
 package com.itau.insurance.presentation.controller.handler
 
 import com.itau.insurance.application.exceptions.DataBaseGenericException
-import com.itau.insurance.application.exceptions.QuotationNotFoundException
-import com.itau.insurance.domain.exception.ProductNotActiveException
+import com.itau.insurance.domain.exception.NotFoundException
+import com.itau.insurance.domain.exception.ValidationDataException
 import com.itau.insurance.presentation.dto.ErrorResponse
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -17,20 +17,20 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 class HandlerControllerException : ResponseEntityExceptionHandler() {
 
-    @ExceptionHandler(QuotationNotFoundException::class)
-    fun quotationNotFoundException(exception: QuotationNotFoundException): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(NotFoundException::class)
+    fun notFound(exception: NotFoundException): ResponseEntity<ErrorResponse> {
         val response = ErrorResponse.create(
             message = exception.message!!,
         )
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response)
     }
 
-    @ExceptionHandler(ProductNotActiveException::class)
-    fun productNotFound(exception: ProductNotActiveException): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(ValidationDataException::class)
+    fun validationDataException(exception: ValidationDataException): ResponseEntity<ErrorResponse> {
         val response = ErrorResponse.create(
             message = exception.message!!,
         )
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response)
     }
 
     @ExceptionHandler(DataBaseGenericException::class)

@@ -12,13 +12,13 @@ class QuotationValidator {
 
     fun validateProduct(product: ProductDtoResponse) {
         if (!product.active) {
-            throw ProductNotActiveException(product.id)
+            throw ValidationDataException("Product with id ${product.id} is disable")
         }
     }
 
     fun validateOffer(offer: OfferDtoResponse) {
         if (!offer.active) {
-            throw OfferNotActiveException(offer.id)
+            throw ValidationDataException("Offer with id ${offer.id} is disable")
         }
     }
 
@@ -26,15 +26,15 @@ class QuotationValidator {
         val allKeysPresent = currentCoverage.keys.all { it in offerCoverage.keys }
 
         if (!allKeysPresent) {
-            throw CoveragesNotPresentException()
+            throw ValidationDataException("Coverages not present")
         }
 
         currentCoverage.forEach { (coverage, currentValue) ->
             val offerValue = offerCoverage[coverage]
-                ?: throw CoveragesNotPresentException("Cobertura $coverage não encontrada na oferta.")
+                ?: throw ValidationDataException("Coverage $coverage not found in offer")
 
             if (currentValue >= offerValue) {
-                throw CoveragesValueException("O valor da cobertura $coverage não está abaixo do permitido.")
+                throw  throw ValidationDataException("Coverage amount $coverage is not below the permitted amount")
             }
         }
     }
@@ -43,7 +43,7 @@ class QuotationValidator {
         val allAssistancesPresent = currentAssistances.all { it in offerAssistances }
 
         if (!allAssistancesPresent) {
-            throw AssistancesNotPresentException()
+            throw ValidationDataException("Not all assistance is present in the offers")
         }
     }
 
@@ -51,8 +51,8 @@ class QuotationValidator {
         currentValue: BigDecimal, minimumValue: BigDecimal, maximumValue: BigDecimal
     ) {
         if (currentValue < minimumValue || currentValue > maximumValue) {
-            throw TotalMonthlyPremiumAmountException(
-                "Valor total do prêmio mensal ($currentValue) está fora do intervalo permitido."
+            throw ValidationDataException(
+                "Total monthly premium value ($currentValue) is outside the allowed range"
             )
         }
     }
@@ -61,8 +61,9 @@ class QuotationValidator {
         val calculatedTotalCoverage = quotation.coverages.values.reduce { acc, coverage -> acc + coverage }
 
         if (calculatedTotalCoverage != quotation.totalCoverageAmount) {
-            throw TotalCoverageException("O valor total das coberturas (${calculatedTotalCoverage}) " +
-                    "não corresponde ao informado (${quotation.totalCoverageAmount}).")
+            throw ValidationDataException("The total coverage amount (${calculatedTotalCoverage}) does not match " +
+                    "the amount reported (${quotation.totalCoverageAmount})"
+            )
         }
     }
 }

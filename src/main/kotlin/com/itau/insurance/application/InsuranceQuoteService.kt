@@ -1,6 +1,6 @@
 package com.itau.insurance.application
 
-import com.itau.insurance.application.common.Logger
+import com.itau.insurance.common.Logger
 import com.itau.insurance.application.exceptions.DataBaseGenericException
 import com.itau.insurance.domain.Quotation
 import com.itau.insurance.domain.exception.NotFoundException

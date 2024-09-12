@@ -1,6 +1,6 @@
 package com.itau.insurance.application.exceptions
 
-import com.itau.insurance.application.common.Logger
+import com.itau.insurance.common.Logger
 
 class DataBaseGenericException(message: String = "Database error") : RuntimeException(message) {
     companion object {

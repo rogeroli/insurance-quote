@@ -1,7 +1,7 @@
 package com.itau.insurance.infrastructure.service.publisher
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.itau.insurance.application.common.Logger
+import com.itau.insurance.common.Logger
 import com.itau.insurance.domain.Quotation
 import com.itau.insurance.infrastructure.service.dto.messages.QuotationMessage
 import org.springframework.amqp.rabbit.core.RabbitTemplate

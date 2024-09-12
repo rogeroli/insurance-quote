@@ -4,7 +4,7 @@ import com.itau.insurance.infrastructure.service.dto.messages.InsurancePolicyMes
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.itau.insurance.application.InsuranceQuoteService
-import com.itau.insurance.application.common.Logger
+import com.itau.insurance.common.Logger
 import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component

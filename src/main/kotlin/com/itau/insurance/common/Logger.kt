@@ -1,4 +1,4 @@
-package com.itau.insurance.application.common
+package com.itau.insurance.common
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

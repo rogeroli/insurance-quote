@@ -25,7 +25,25 @@ spring:
     h2:
         console:
             enabled: true
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
 
 gateway:
     catalog-service:
         url: https://e13286f8-d609-4189-ab16-c70bde15bf9d.mock.pstmn.io
+
+rabbitmq:
+    exchange: insurance.policy.exchange
+    routingkey:
+        insurance-policy-create: policy.routingkey
+        insurance-quote-received: quote.routingkey
+    queue:
+        insurance-policy-create: insurance-policy-create
+        insurance-quote-received: insurance-quote-received
+        insurance-policy-create-dlq: insurance-policy-create-dlq
+    ttl: 604800000  # 7 dias em milissegundos
+    max-redeliveries: 3
+

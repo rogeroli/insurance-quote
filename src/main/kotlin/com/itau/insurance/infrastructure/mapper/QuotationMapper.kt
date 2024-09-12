@@ -20,6 +20,8 @@ object QuotationMapper {
 
     fun toDomain(quotationEntity: QuotationEntity): Quotation {
         return Quotation(
+            id = quotationEntity.id,
+            policyId = quotationEntity.policyId,
             productId = quotationEntity.productId,
             offerId = quotationEntity.offerId,
             category = quotationEntity.category,
@@ -27,7 +29,9 @@ object QuotationMapper {
             totalCoverageAmount = quotationEntity.totalCoverageAmount,
             coverages = quotationEntity.coverages,
             assistances = quotationEntity.assistances,
-            customer = CustomerMapper.toDomain(quotationEntity.customer)
+            customer = CustomerMapper.toDomain(quotationEntity.customer),
+            createdAt = quotationEntity.createAt,
+            updatedAt = quotationEntity.updateAt
         )
     }
 }

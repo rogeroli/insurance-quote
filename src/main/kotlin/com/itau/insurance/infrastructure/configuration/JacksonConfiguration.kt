@@ -17,4 +17,5 @@ class JacksonConfiguration {
             .registerModule(JavaTimeModule())
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
     }
+
 }

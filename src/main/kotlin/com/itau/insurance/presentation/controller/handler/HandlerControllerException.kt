@@ -1,6 +1,7 @@
 package com.itau.insurance.presentation.controller.handler
 
 import com.itau.insurance.application.exceptions.DataBaseGenericException
+import com.itau.insurance.application.exceptions.QuotationNotFoundException
 import com.itau.insurance.domain.exception.ProductNotActiveException
 import com.itau.insurance.presentation.dto.ErrorResponse
 import org.springframework.http.HttpHeaders
@@ -16,11 +17,18 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 class HandlerControllerException : ResponseEntityExceptionHandler() {
 
+    @ExceptionHandler(QuotationNotFoundException::class)
+    fun quotationNotFoundException(exception: QuotationNotFoundException): ResponseEntity<ErrorResponse> {
+        val response = ErrorResponse.create(
+            message = exception.message!!,
+        )
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response)
+    }
+
     @ExceptionHandler(ProductNotActiveException::class)
     fun productNotFound(exception: ProductNotActiveException): ResponseEntity<ErrorResponse> {
         val response = ErrorResponse.create(
             message = exception.message!!,
-            details = mapOf("id" to exception.id)
         )
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response)
     }
@@ -29,7 +37,6 @@ class HandlerControllerException : ResponseEntityExceptionHandler() {
     fun dataBaseGenericException(exception: DataBaseGenericException): ResponseEntity<ErrorResponse> {
         val response = ErrorResponse.create(
             message = exception.message!!,
-            details = emptyMap()
         )
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response)
     }
@@ -41,8 +48,7 @@ class HandlerControllerException : ResponseEntityExceptionHandler() {
         request: WebRequest
     ): ResponseEntity<Any>? {
         val response = ErrorResponse.create(
-            message = "Error in Request",
-            details = mapOf("error" to exception.message)
+            message = "Error in Request"
         )
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response)
     }

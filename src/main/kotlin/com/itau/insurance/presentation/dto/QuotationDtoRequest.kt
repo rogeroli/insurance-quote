@@ -1,10 +1,9 @@
 package com.itau.insurance.presentation.dto
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.itau.insurance.domain.Customer
 import com.itau.insurance.domain.Quotation
 import com.itau.insurance.domain.enums.CategoryType
 import java.math.BigDecimal
-import java.util.UUID
+import java.util.*
 
 data class QuotationDtoRequest(
     @JsonProperty("product_id")
@@ -27,23 +26,6 @@ data class QuotationDtoRequest(
 
     val customer: CustomerDtoRequest
 ){
-    companion object {
-        fun fromDomain(quotation: Quotation): QuotationDtoRequest {
-            return quotation.run {
-                QuotationDtoRequest(
-                    productId = productId,
-                    offerId = offerId,
-                    category = category,
-                    totalMonthlyPremiumAmount = totalMonthlyPremiumAmount,
-                    totalCoverageAmount = totalCoverageAmount,
-                    coverages = coverages,
-                    assistances = assistances,
-                    customer = CustomerDtoRequest.fromDomain(customer)
-                )
-            }
-        }
-    }
-
     fun toDomain(): Quotation {
         return Quotation(
             productId = this.productId,

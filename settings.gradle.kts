@@ -1,1 +1,1 @@
-rootProject.name = "insurance"
+rootProject.name = "insurance-api"

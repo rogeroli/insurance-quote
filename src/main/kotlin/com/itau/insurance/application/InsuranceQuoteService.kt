@@ -19,10 +19,10 @@ class InsuranceQuoteService(
     private val catalogServiceGateway: CatalogServiceGateway,
     private val quotationRepository: QuotationRepository,
     private val quotationValidator: QuotationValidator,
-    private val quoteReceiverPublisher: QuoteReceiverPublisher
-) {
+    private val quoteReceiverPublisher: QuoteReceiverPublisher) {
 
     private val logger = Logger.getLogger(this::class.java)
+    private val mapper = QuotationMapper()
 
     fun create(quotation: Quotation) {
         quotationValidator.validateTotalCoverageAmount(quotation)
@@ -48,7 +48,7 @@ class InsuranceQuoteService(
             minimumValue = offer.monthlyPremiumAmount.minAmount,
             maximumValue = offer.monthlyPremiumAmount.maxAmount
         )
-        val quotationEntity = QuotationMapper.toEntity(quotation)
+        val quotationEntity = mapper.toEntity(quotation)
 
         val quotationPersisted = try{
                 quotationRepository.save(quotationEntity)
@@ -68,7 +68,7 @@ class InsuranceQuoteService(
             throw NotFoundException("Quotation with ID $id not found")
         }
 
-        return QuotationMapper.toDomain(quotationOptional.get())
+        return mapper.toDomain(quotationOptional.get())
     }
 
     fun setPolicy(quotationId: Long, policyId: Long) {

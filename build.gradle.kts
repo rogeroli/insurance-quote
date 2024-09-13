@@ -5,7 +5,7 @@ plugins {
 	kotlin("plugin.spring") version "1.9.24"
 }
 
-group = "com.itau.insurance"
+group = "com.itau.insurance-api"
 version = "0.0.1"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
@@ -55,6 +55,7 @@ dependencies {
 	testImplementation("io.mockk:mockk:1.13.5")
 	testImplementation("org.mockito:mockito-core:5.2.0")
 	testImplementation("org.mockito:mockito-inline:5.2.0")
+	testImplementation("org.springframework.amqp:spring-rabbit-test")
 }
 
 kotlin {

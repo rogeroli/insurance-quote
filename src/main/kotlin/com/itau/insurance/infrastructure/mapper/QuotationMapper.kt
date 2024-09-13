@@ -3,7 +3,7 @@ package com.itau.insurance.infrastructure.mapper
 import com.itau.insurance.domain.Quotation
 import com.itau.insurance.infrastructure.persistence.entity.QuotationEntity
 
-object QuotationMapper {
+class QuotationMapper {
 
     fun toEntity(quotation: Quotation): QuotationEntity {
         return QuotationEntity(

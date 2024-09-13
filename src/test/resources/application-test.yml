@@ -1,6 +1,6 @@
 server:
     servlet:
-        context-path: /insurance/api
+        context-path: /api
 
 spring:
     datasource:
@@ -15,8 +15,34 @@ spring:
     h2:
         console:
             enabled: true
+            path: /h2-console
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+        listener:
+            simple:
+                retry:
+                    enabled: true
+                acknowledge-mode: auto
+
+rabbitmq:
+    queues:
+        insurance-policy-create: insurance-policy-create-test
+        insurance-policy-create-dlq: insurance-policy-create-dlq
+    exchanges:
+        insurance-policy-exchange: insurance-policy-exchange
+    bindings:
+        insurance-policy-create:
+            exchange: insurance-policy-exchange
+            routing-key: insurance.policy.create
+        insurance-policy-create-dlq:
+            exchange: insurance-policy-exchange
+            routing-key: insurance.policy.create
 
 logging:
     level:
         root: INFO
         org.springframework.test.context.transaction: DEBUG
+        org.springframework: DEBUG
